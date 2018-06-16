@@ -9,7 +9,7 @@ public class UtilMethods {
 
     public static String displayOpen(final Stage primaryStage) {
         FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Import Data (*.Csv | *.txt)", "*.csv" , "*.text" , "*.txt");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Select 3d file to convert", ".fbx" , ".obj" , ".wav", ".stl", ".dae", ".collada", ".max");
         fileChooser.getExtensionFilters().add(extFilter);
         File file = fileChooser.showOpenDialog(primaryStage);
         String target = file.getAbsolutePath();
