@@ -9,6 +9,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.io.File;
+
 /**
  *   Permission is hereby granted, free of charge, to any person obtaining a copy of this
  *   software and associated documentation files (the "Software"), to deal in the Software
@@ -30,6 +32,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    public String openFile;
 
     public void start(Stage primaryStage) throws Exception {
         Stage window = primaryStage;
@@ -44,13 +47,10 @@ public class Main extends Application {
         MainBorderPane.setBottom(BottomBorderPane);
 
         GridPane TopGrid = new GridPane();
-        GridPane BottomGrid = new GridPane();
 
         TopBorderPane.setCenter(TopGrid);
-        BottomBorderPane.setCenter(BottomGrid);
 
         Button Open = new Button("Open");
-        Button Output = new Button("Select Output");
         Button Convert = new Button("Convert");
 
 
@@ -58,8 +58,7 @@ public class Main extends Application {
         TextField FileLocationTop = new TextField();
         FileLocationTop.setEditable(false);
 
-        TextField FileLocationBottom = new TextField();
-        FileLocationBottom.setEditable(false);
+
 
         ObservableList<String> topfile =
                 FXCollections.observableArrayList(
@@ -76,40 +75,27 @@ public class Main extends Application {
         final ComboBox<String> topFileCombo = new ComboBox<String>(topfile);
 
 
-        ObservableList<String> bottomfile =
-                FXCollections.observableArrayList(
-                        ".fbx",
-                        ".obj",
-                        ".wav",
-                        ".3ds",
-                        ".stla",
-                        ".stlb",
-                        ".dae",
-                        ".collada",
-                        ".max"
-                );
-        final ComboBox<String> bottomFileCombo = new ComboBox<String>(bottomfile);
 
 
+        Open.setOnAction(e ->{
+
+            openFile = UtilMethods.displayOpen(window);
+            FileLocationTop.setText(openFile);
+
+
+
+        });
 
         FileLocationTop.setMinWidth(250);
-        FileLocationBottom.setMinWidth(250);
         Open.setMinWidth(100);
-        Output.setMinWidth(100);
+
         Convert.setMinWidth(100);
         topFileCombo.setMinWidth(100);
-        bottomFileCombo.setMinWidth(100);
-
-
 
 
         TopGrid.add(Open , 0, 0, 1, 1);
         TopGrid.add(FileLocationTop , 1, 0, 1, 1);
         TopGrid.add(topFileCombo, 2,0,1,1);
-
-        TopGrid.add(Output , 0, 1, 1, 1);
-        TopGrid.add(FileLocationBottom , 1, 1, 1, 1);
-        TopGrid.add(bottomFileCombo, 2,1,1,1);
 
         TopGrid.add(Convert, 2,2,1,1);
 
