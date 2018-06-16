@@ -1,4 +1,6 @@
 import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
@@ -28,6 +30,12 @@ public class Main extends Application {
 
         window.setTitle("3d Model Converter");
 
+
+        BorderPane MainBorderPane = new BorderPane();
+
+        Scene MainScene = new Scene(MainBorderPane, 600, 600);
+
+        window.setScene(MainScene);
 
 
         window.setResizable(true);
