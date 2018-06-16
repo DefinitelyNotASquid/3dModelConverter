@@ -1,6 +1,12 @@
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 /**
@@ -32,8 +38,83 @@ public class Main extends Application {
 
 
         BorderPane MainBorderPane = new BorderPane();
+        BorderPane TopBorderPane = new BorderPane();
+        BorderPane BottomBorderPane = new BorderPane();
+        MainBorderPane.setTop(TopBorderPane);
+        MainBorderPane.setBottom(BottomBorderPane);
 
-        Scene MainScene = new Scene(MainBorderPane, 600, 600);
+        GridPane TopGrid = new GridPane();
+        GridPane BottomGrid = new GridPane();
+
+        TopBorderPane.setCenter(TopGrid);
+        BottomBorderPane.setCenter(BottomGrid);
+
+        Button Open = new Button("Open");
+        Button Output = new Button("Select Output");
+        Button Convert = new Button("Convert");
+
+
+
+        TextField FileLocationTop = new TextField();
+        FileLocationTop.setEditable(false);
+
+        TextField FileLocationBottom = new TextField();
+        FileLocationBottom.setEditable(false);
+
+        ObservableList<String> topfile =
+                FXCollections.observableArrayList(
+                        ".fbx",
+                        ".obj",
+                        ".wav",
+                        ".3ds",
+                        ".stla",
+                        ".stlb",
+                        ".dae",
+                        ".collada",
+                        ".max"
+                );
+        final ComboBox<String> topFileCombo = new ComboBox<String>(topfile);
+
+
+        ObservableList<String> bottomfile =
+                FXCollections.observableArrayList(
+                        ".fbx",
+                        ".obj",
+                        ".wav",
+                        ".3ds",
+                        ".stla",
+                        ".stlb",
+                        ".dae",
+                        ".collada",
+                        ".max"
+                );
+        final ComboBox<String> bottomFileCombo = new ComboBox<String>(bottomfile);
+
+
+
+        FileLocationTop.setMinWidth(250);
+        FileLocationBottom.setMinWidth(250);
+        Open.setMinWidth(100);
+        Output.setMinWidth(100);
+        Convert.setMinWidth(100);
+        topFileCombo.setMinWidth(100);
+        bottomFileCombo.setMinWidth(100);
+
+
+
+
+        TopGrid.add(Open , 0, 0, 1, 1);
+        TopGrid.add(FileLocationTop , 1, 0, 1, 1);
+        TopGrid.add(topFileCombo, 2,0,1,1);
+
+        TopGrid.add(Output , 0, 1, 1, 1);
+        TopGrid.add(FileLocationBottom , 1, 1, 1, 1);
+        TopGrid.add(bottomFileCombo, 2,1,1,1);
+
+        TopGrid.add(Convert, 2,2,1,1);
+
+
+        Scene MainScene = new Scene(MainBorderPane, 460, 100);
 
         window.setScene(MainScene);
 
